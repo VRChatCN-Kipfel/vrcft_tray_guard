@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+permissions:
+  contents: write
+  packages: read
+
 on:
   push:
     branches: [ main ]
@@ -32,24 +36,16 @@ jobs:
         name: vrcft-tray-guard-executable
         path: dist/
         if-no-files-found: error
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: vrcft-tray-guard-executable
-        path: dist/
-    
     - name: Create Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
+        tag_name: pre-release
+        name: "Pre-release Build"
+        body: |
+          Automated pre-release build
+          Commit: ${{ github.sha }}
+          Built on: $(date -u)
         files: |
           dist/*.exe
-        draft: true
+        draft: false
         prerelease: true
