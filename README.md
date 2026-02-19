@@ -27,5 +27,22 @@
 ### 快速开始
 1. 克隆仓库：
    ```bash
-   git clone [https://github.com/你的用户名/VRCFT-Guardian.git](https://github.com/你的用户名/VRCFT-Guardian.git)
+   git clone https://github.com/VRChatCN-Kipfel/vrcft_tray_guard.git
    cd VRCFT-Guardian
+   ```
+
+2. 安装依赖：
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. 直接运行：
+   ```bash
+   python vrcft_tray_guard.py
+   ```
+
+4. 或者构建独立可执行文件：
+   ```bash
+   pip install pyinstaller
+   pyinstaller vrcft_tray_guard.spec
+   ```
